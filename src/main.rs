@@ -1,4 +1,4 @@
-use std::io;
+use std::{cmp::Ordering, io};
 
 use rand::Rng;
 
@@ -17,5 +17,17 @@ fn main() {
         .read_line(&mut guess)
         .expect("입력한 값을 읽지 못했습니다.");
 
+    let guess: u32 = guess
+        .trim()
+        .parse()
+        .expect("입력한 값이 올바른 숫자가 아닙니다.");
+
     println!("입력한 값: {}", guess);
+
+    // 비교 결과
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("입력한 숫자가 작습니다!"),
+        Ordering::Greater => println!("입력한 숫자가 큽니다!"),
+        Ordering::Equal => println!("정답!"),
+    }
 }
